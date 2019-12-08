@@ -1,6 +1,125 @@
 {
 	"name": "pipeline1",
 	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "JWJ-SPS2019_20191208-000004/DataCollector01.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "JWJ-SPS2019_20191208-000004/DataCollector01.csv"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "*",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "FileServerWriteSettings",
+							"maxConcurrentConnections": 10,
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "(PDH-CSV 4.0) (Arabian Standard Time)(-240)",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TimeGenerated",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Memory In Use",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Processor Time",
+									"type": "Double"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
+					}
+				}
+			}
+		],
 		"annotations": []
 	}
 }
