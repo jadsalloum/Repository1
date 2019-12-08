@@ -1,0 +1,36 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FileServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "DataCollector01.csv",
+				"folderPath": "JWJ-SPS2019_20191208-000004"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "(PDH-CSV 4.0) (Arabian Standard Time)(-240)",
+				"type": "String"
+			},
+			{
+				"name": "\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use",
+				"type": "String"
+			},
+			{
+				"name": "\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time",
+				"type": "String"
+			}
+		]
+	}
+}
