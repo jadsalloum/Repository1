@@ -1,0 +1,6 @@
+{
+	"name": "Copy-data-pipeline-omprem-to-datalake",
+	"properties": {
+		"annotations": []
+	}
+}
