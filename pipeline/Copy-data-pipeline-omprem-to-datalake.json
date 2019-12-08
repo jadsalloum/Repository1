@@ -1,6 +1,95 @@
 {
 	"name": "Copy-data-pipeline-omprem-to-datalake",
 	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "FileServerWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "(PDH-CSV 4.0) (Arabian Standard Time)(-240)",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TimeGenerated",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Memory % Committed Bytes In Use",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time",
+									"type": "String"
+								},
+								"sink": {
+									"name": "% Processor Time",
+									"type": "Double"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "datafromesamserver03",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "datafromesamserver03",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
 		"annotations": []
 	}
 }
