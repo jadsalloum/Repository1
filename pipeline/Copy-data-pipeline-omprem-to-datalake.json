@@ -28,8 +28,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "FileServerReadSettings",
-							"recursive": true,
-							"wildcardFileName": "*.csv",
+							"recursive": false,
+							"wildcardFolderPath": "*",
+							"wildcardFileName": "DataCollector*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
