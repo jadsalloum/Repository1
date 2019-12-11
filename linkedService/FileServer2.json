@@ -7,10 +7,10 @@
 		"typeProperties": {
 			"host": "C:\\temp\\PerfDatafor AI",
 			"userId": "middleeast\\jads",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiMjA3NDU1Mi00NjdiLTQzMWYtOGNiYy0wZGQ0NTYwOTkwMTMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1MTY0YmExZC0xOTk0LTRiNjItODQ3ZS1jOGI3Zjg0ZTZmNjgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "integrationRuntime-jadlaptop",
+			"referenceName": "integrationRuntime-esamserver",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
