@@ -1,22 +1,17 @@
 {
-	"name": "DelimitedText1",
+	"name": "DataSetfromJadLaptop",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "FileServer1",
+			"referenceName": "FileServer2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation",
-				"fileName": "*.csv"
+				"type": "FileServerLocation"
 			},
 			"columnDelimiter": ",",
-			"compressionCodec": {
-				"value": "*",
-				"type": "Expression"
-			},
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""

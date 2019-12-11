@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "datafromesamserver03",
+						"referenceName": "DataSetfromJadLaptop",
 						"type": "DatasetReference"
 					},
 					"name": "SourcefromServerdata"
@@ -14,6 +14,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
@@ -22,7 +26,7 @@
 					"name": "Select1"
 				}
 			],
-			"script": "\n\nsource(output(\n\t\t{(PDH-CSV 4.0) (Arabian Standard Time)(-240)} as string,\n\t\t{\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use} as string,\n\t\t{\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpurgeFiles: true,\n\tpartitionRootPath: '*',\n\twildcardPaths:['*']) ~> SourcefromServerdata\nSourcefromServerdata select(mapColumn(\n\t\tTimeGenerated = {(PDH-CSV 4.0) (Arabian Standard Time)(-240)},\n\t\t{Memory Committed Bytes In Use} = {\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use},\n\t\t{Processor Time} = {\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSourcefromServerdata sink() ~> sink1"
+			"script": "\n\nsource(output(\n\t\t{(PDH-CSV 4.0) (Arabian Standard Time)(-240)} as string,\n\t\t{\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use} as string,\n\t\t{\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpurgeFiles: true,\n\tpartitionRootPath: '*',\n\twildcardPaths:['*']) ~> SourcefromServerdata\nSourcefromServerdata select(mapColumn(\n\t\tTimeGenerated = {(PDH-CSV 4.0) (Arabian Standard Time)(-240)},\n\t\t{Memory Committed Bytes In Use} = {\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use},\n\t\t{Processor Time} = {\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSourcefromServerdata sink(input(\n\t\t{(PDH-CSV 4.0) (Arabian Standard Time)(-240)} as string,\n\t\t{\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use} as string,\n\t\t{\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sink1"
 		}
 	}
 }
