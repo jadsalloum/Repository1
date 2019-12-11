@@ -1,0 +1,6 @@
+{
+	"name": "integrationRuntime-jadlaptop",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
