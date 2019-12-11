@@ -1,17 +1,24 @@
 {
 	"name": "FileServer2",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
 			"host": "C:\\temp\\PerfDatafor AI",
 			"userId": "middleeast\\jads",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1ODYwNTlkOS0wZWJkLTQ2MDktOWQ1YS1hOTUwYzFlYWEwYjciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "jadssecret"
+			}
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime-jadlaptop",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
