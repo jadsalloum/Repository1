@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "jaddemodatafactory"
+		},
+		"integrationRuntime_integrationRuntime-esamserver": {
+			"value": "integrationRuntime-esamserver"
+		},
+		"integrationRuntime_integrationRuntime-jadlaptop": {
+			"value": "integrationRuntime-jadlaptop"
+		},
+		"integrationRuntime_integrationRuntime1": {
+			"value": "integrationRuntime1"
+		},
+		"integrationRuntime_integrationRuntimeAzureDataLake": {
+			"value": "integrationRuntimeAzureDataLake"
+		},
+		"AzureDataLakeStore1_servicePrincipalKey": {
+			"value": ""
+		},
+		"FileServer1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://mydatalakestorage.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+			"value": "b05a304e-cbf7-4ddf-a294-538c98dfc3f5"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"value": "ebb4f986-c8e7-475b-b0ac-34c473f39719"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"value": "MSDN-AI-RG"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://JadsKeyVault.vault.azure.net/"
+		},
+		"FileServer1_properties_typeProperties_host": {
+			"value": "C:\\temp\\PerfDatafor AI"
+		},
+		"FileServer1_properties_typeProperties_userId": {
+			"value": "middleeast\\jads"
+		},
+		"FileServer2_properties_typeProperties_host": {
+			"value": "C:\\temp\\PerfDatafor AI"
+		},
+		"FileServer2_properties_typeProperties_userId": {
+			"value": "middleeast\\jads"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
