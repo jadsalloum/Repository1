@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "FileServerLocation",
-				"fileName": "DataCollector01.csv",
-				"folderPath": "JWJ-SPS2019_20191208-000004"
+				"fileName": "*.csv",
+				"folderPath": "*"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
