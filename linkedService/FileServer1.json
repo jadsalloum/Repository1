@@ -5,9 +5,9 @@
 		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
-			"host": "\\\\jwj-sps2019\\PerfDatafor AI",
-			"userId": "jwj\\spsadmin",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyNmRlNGVlYi0xMjJjLTQyOTctYThmNC1hYzU3ZTgzMTE5NGUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"host": "C:\\temp\\PerfDatafor AI",
+			"userId": "middleeast\\jads",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkYWFjZDUwZC1jMzBjLTQyZTEtODE4MS0wY2Q0YjAzMmJiZDYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime-esamserver",
