@@ -100,11 +100,11 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "/DataCollector01.csv"
+								"value": "/"
 							},
 							{
 								"name": "Destination",
-								"value": "/DataCollector01.csv"
+								"value": "PerfMonData/"
 							}
 						],
 						"typeProperties": {
@@ -113,8 +113,7 @@
 								"storeSettings": {
 									"type": "FileServerReadSettings",
 									"recursive": false,
-									"wildcardFolderPath": "*",
-									"wildcardFileName": "DataCollector*.csv",
+									"wildcardFileName": "*.*",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -124,13 +123,12 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureDataLakeStoreWriteSettings",
-									"copyBehavior": "MergeFiles"
+									"type": "AzureDataLakeStoreWriteSettings"
 								},
 								"formatSettings": {
 									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
-									"fileExtension": ".csv"
+									"fileExtension": ""
 								}
 							},
 							"enableStaging": false,
@@ -143,8 +141,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"type": "DateTime",
-											"ordinal": 1
+											"name": "(PDH-CSV 4.0) (Arabian Standard Time)(-240)",
+											"type": "String"
 										}
 									},
 									{
@@ -153,8 +151,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"type": "Double",
-											"ordinal": 2
+											"name": "\\JWJ-SPS2019\\Memory\\% Committed Bytes In Use",
+											"type": "String"
 										}
 									},
 									{
@@ -163,8 +161,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"type": "Double",
-											"ordinal": 3
+											"name": "\\JWJ-SPS2019\\Processor(_Total)\\% Processor Time",
+											"type": "String"
 										}
 									}
 								]
@@ -211,6 +209,7 @@
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
+					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": []
@@ -315,8 +314,7 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "FileServerLocation",
-						"fileName": "DataCollector01.csv"
+						"type": "FileServerLocation"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
