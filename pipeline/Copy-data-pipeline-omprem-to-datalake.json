@@ -40,7 +40,7 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "FileServerWriteSettings",
+							"type": "AzureDataLakeStoreWriteSettings",
 							"copyBehavior": "MergeFiles"
 						},
 						"formatSettings": {
@@ -59,8 +59,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "TimeGenerated",
-									"type": "DateTime"
+									"type": "DateTime",
+									"ordinal": 1
 								}
 							},
 							{
@@ -69,8 +69,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Memory % Committed Bytes In Use",
-									"type": "Double"
+									"type": "Double",
+									"ordinal": 2
 								}
 							},
 							{
@@ -79,8 +79,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "% Processor Time",
-									"type": "Double"
+									"type": "Double",
+									"ordinal": 3
 								}
 							}
 						]
@@ -94,7 +94,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "datafromesamserver03",
+						"referenceName": "DataLakeGen1",
 						"type": "DatasetReference"
 					}
 				]
