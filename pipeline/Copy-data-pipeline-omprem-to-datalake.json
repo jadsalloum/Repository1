@@ -29,8 +29,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "*",
-							"wildcardFileName": "DataCollector*.csv",
+							"wildcardFileName": "*.*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
