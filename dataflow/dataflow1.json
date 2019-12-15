@@ -18,7 +18,7 @@
 					"name": "Select1"
 				}
 			],
-			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tfileList: true,\n\tdateFormats: ['MM/dd/yyyy'],\n\ttimestampFormats: ['MM/dd/yyyy HH:mm:ss'],\n\tpreferredIntegralType: 'integer',\n\tpreferredFractionalType: 'decimal',\n\twildcardPaths:['*.csv']) ~> FromDataLakeGen1CSVFiles\nFromDataLakeGen1CSVFiles select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
+			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tfileList: true,\n\tdateFormats: ['MM/dd/yyyy'],\n\ttimestampFormats: ['MM/dd/yyyy HH:mm:ss'],\n\tpreferredIntegralType: 'integer',\n\tpreferredFractionalType: 'decimal',\n\twildcardPaths:['*']) ~> FromDataLakeGen1CSVFiles\nFromDataLakeGen1CSVFiles select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
 		}
 	}
 }
