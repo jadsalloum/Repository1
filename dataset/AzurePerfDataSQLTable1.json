@@ -1,0 +1,16 @@
+{
+	"name": "AzurePerfDataSQLTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzurePerfMonDataDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PerfDataSQLTable1"
+		}
+	}
+}
