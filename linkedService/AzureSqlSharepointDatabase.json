@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mydemoaisqlserver.database.windows.net;initial catalog=master;user id=sqladmin",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkpBRERFTU9EQVRBRkFDVE9SWV85ZTdhZjQ1ZS05ZDgyLTQ1OGMtOWVkNy1lMTAyNTI2MWI4MTAiDQp9"
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mydemoaisqlserver.database.windows.net;initial catalog=DataAIDatabase;user id=sqladmin",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkpBRERFTU9EQVRBRkFDVE9SWV8zZTk0NmQ4YS0yMzhhLTQzOTAtYmY0My00N2RmMjk3NGE0MzciDQp9"
 		}
 	}
 }
