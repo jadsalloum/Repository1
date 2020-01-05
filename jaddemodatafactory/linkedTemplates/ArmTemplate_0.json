@@ -31,9 +31,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore1'"
 		},
+		"AzurePerfMonDataDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzurePerfMonDataDB'"
+		},
+		"AzureSqlSharepointDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlSharepointDatabase'"
+		},
 		"FileServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
 		},
 		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -115,6 +127,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzurePerfMonDataDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzurePerfMonDataDB_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/', parameters('integrationRuntime_integrationRuntime-esamserver'))]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -162,6 +187,40 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlSharepointDatabase')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlSharepointDatabase_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzurePerfDataSQLTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzurePerfMonDataDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "PerfDataSQLTable1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzurePerfMonDataDB')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DataLakeGen1')]",
@@ -241,6 +300,46 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/', parameters('integrationRuntime_integrationRuntime-jadlaptop'))]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "[parameters('integrationRuntime_integrationRuntime-esamserver')]",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/', parameters('integrationRuntime_integrationRuntime-esamserver'))]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlJobsTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlSharepointDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TimerJobHistory"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlSharepointDatabase')]"
 			]
 		},
 		{
@@ -366,6 +465,86 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerJobsTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ServiceId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "WebApplicationId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "JobId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ServerId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StartTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "EndTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "WebApplicationName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JobTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ServerName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DatabaseName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ErrorMessage",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TimerJobHistory"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Copy-data-pipeline-omprem-to-datalake')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -477,33 +656,199 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/copy-data-trigger-to-datalake')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/DataAI-Pipline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
+				"activities": [
 					{
-						"pipelineReference": {
-							"referenceName": "Copy-data-pipeline-omprem-to-datalake",
-							"type": "PipelineReference"
+						"name": "Copy data from SQL Server",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
 						},
-						"parameters": {}
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.TimerJobHistory"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.TimerJobHistory"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Id",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "Id",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "ServiceId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ServiceId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "WebApplicationId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "WebApplicationId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "JobId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "JobId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ServerId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ServerId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "StartTime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "StartTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "EndTime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EndTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "WebApplicationName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "WebApplicationName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "JobTitle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "JobTitle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ServerName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ServerName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DatabaseName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DatabaseName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ErrorMessage",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ErrorMessage",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerJobsTable",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlJobsTable",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2019-12-08T17:58:00.000Z",
-						"timeZone": "UTC"
-					}
-				}
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy-data-pipeline-omprem-to-datalake')]"
+				"[concat(variables('factoryId'), '/datasets/SqlServerJobsTable')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlJobsTable')]"
 			]
 		}
 	]

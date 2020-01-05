@@ -31,9 +31,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore1'"
 		},
+		"AzurePerfMonDataDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzurePerfMonDataDB'"
+		},
 		"FileServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"AzureSqlSharepointDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlSharepointDatabase'"
 		},
 		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -117,8 +129,17 @@
 					"AzureDataLakeStore1_servicePrincipalKey": {
 						"value": "[parameters('AzureDataLakeStore1_servicePrincipalKey')]"
 					},
+					"AzurePerfMonDataDB_connectionString": {
+						"value": "[parameters('AzurePerfMonDataDB_connectionString')]"
+					},
+					"AzureSqlSharepointDatabase_connectionString": {
+						"value": "[parameters('AzureSqlSharepointDatabase_connectionString')]"
+					},
 					"FileServer1_password": {
 						"value": "[parameters('FileServer1_password')]"
+					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
 					},
 					"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri')]"
@@ -153,6 +174,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
 		}
 	]
 }
