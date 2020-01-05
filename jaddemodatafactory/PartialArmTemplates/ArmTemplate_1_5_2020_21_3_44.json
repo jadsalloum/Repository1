@@ -1,0 +1,277 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "jaddemodatafactory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DataAI-Pipline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data from SQL Server",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Id",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "Id",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "ServiceId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ServiceId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "WebApplicationId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "WebApplicationId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "JobId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "JobId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ServerId",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ServerId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "StartTime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "StartTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "EndTime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "EndTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "WebApplicationName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "WebApplicationName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "JobTitle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "JobTitle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ServerName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ServerName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DatabaseName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DatabaseName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ErrorMessage",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ErrorMessage",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerJobsTable",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlJobsTable",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSqlJobsTable')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlJobsTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlSharepointDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ServiceId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "WebApplicationId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "JobId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ServerId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StartTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "EndTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "WebApplicationName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JobTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ServerName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DatabaseName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ErrorMessage",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TimerJobHistory"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

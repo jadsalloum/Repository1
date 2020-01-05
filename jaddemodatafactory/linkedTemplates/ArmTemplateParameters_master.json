@@ -23,13 +23,13 @@
 		"AzurePerfMonDataDB_connectionString": {
 			"value": ""
 		},
+		"AzureSqlSharepointDatabase_connectionString": {
+			"value": ""
+		},
 		"FileServer1_password": {
 			"value": ""
 		},
 		"SqlServer1_connectionString": {
-			"value": ""
-		},
-		"AzureSqlSharepointDatabase_connectionString": {
 			"value": ""
 		},
 		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
