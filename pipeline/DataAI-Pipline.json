@@ -13,7 +13,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.TimerJobHistory"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.TimerJobHistory"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
@@ -23,7 +32,142 @@
 						"type": "AzureSqlSink",
 						"tableOption": "autoCreate"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "ServiceId",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "ServiceId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "WebApplicationId",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "WebApplicationId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "JobId",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "JobId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "ServerId",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "ServerId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "StartTime",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "StartTime",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "EndTime",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "EndTime",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "WebApplicationName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "WebApplicationName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "JobTitle",
+									"type": "String"
+								},
+								"sink": {
+									"name": "JobTitle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ServerName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ServerName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DatabaseName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DatabaseName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ErrorMessage",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ErrorMessage",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
