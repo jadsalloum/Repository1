@@ -1,0 +1,12 @@
+{
+	"name": "AzureSqlJobsTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlSharepointDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
