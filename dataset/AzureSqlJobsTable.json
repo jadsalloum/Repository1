@@ -7,7 +7,66 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ServiceId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "WebApplicationId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "JobId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "ServerId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "StartTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "EndTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "WebApplicationName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JobTitle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ServerName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DatabaseName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ErrorMessage",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "TimerJobHistory"
