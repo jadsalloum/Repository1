@@ -1,0 +1,16 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=10.165.248.166;initial catalog=Sharepoint_Config;user id=sa",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5NWI4ZDY4NC00YTRjLTQ0NWEtODJmNC1hOWQ1YzE2YjMxNzEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime-esamserver",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
